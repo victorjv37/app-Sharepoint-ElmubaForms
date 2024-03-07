@@ -48,27 +48,27 @@ const LoadingPage: React.FC = () => {
       <div style={{ 
             display: isVisible ? 'flex' : 'none',
             flexDirection:'column', 
-            alignItems:'flex-start',
-            backgroundImage: `url("https://elmubas.com/wp-content/uploads/2023/05/servicio-innovacion-1-1.webp")`,
-            backgroundSize: 'cover',
+            alignItems:'center',
+            justifyContent:'center',
+            backgroundImage: `url("https://i0.wp.com/gananzia.com/wp-content/uploads/2019/08/elmubas.jpg?fit=500%2C375&ssl=1")`,
+            backgroundSize: 'contain',
             backgroundPosition: 'center',
             width: '100%',
-            height: '38vh'
+            height: '50vh'
             }}>
-        <div style={{marginLeft: '55px', marginTop: '22px'}}>
+        <div>
           <div
           style={{ display: 'flex',flexDirection:'column', justifyContent:'center',alignItems: 'center' }}
           >
               <h3>SOLICITUD DE ALTA</h3>
           </div>
             <div ref={body}>
-              <div style={{ display: 'flex',flexDirection:'column', alignItems:'center', fontSize: '14px',marginTop:'37px'}} ref={container} >
+              <div style={{ display: 'flex',flexDirection:'column', alignItems:'center', fontSize: '28px',marginTop:'20px'}} ref={container} >
                 <h4>Redirigiendo a Sharepoint</h4>
-                <br/>
                 <div style={{ display: 'flex' }}>
-                <ClockLoader color={"#2094c9"} loading={true} size={45} />
+                <ClockLoader color={"#99abaf "} loading={true} size={75} />
                 </div>            
-                <span style={{fontSize:'10px',color:'#dad7d9'}}>(Esto podría tardar unos segundos...)</span>
+                <span style={{fontSize:'16px'}}>(Esto podría tardar unos segundos...)</span>
             </div>
           </div>
         </div>
