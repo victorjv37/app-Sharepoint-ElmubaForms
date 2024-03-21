@@ -1,363 +1,150 @@
 /* eslint-disable no-useless-escape */
 /* eslint-disable @typescript-eslint/explicit-function-return-type */
-import { useEffect, useState, useRef } from "react";
-import { Button, Form } from "react-bootstrap";
-import { useForm } from "react-hook-form";
+import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import { ErrorMessage } from "@hookform/error-message";
-import { gsap, Power3 } from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as React from "react";
-import './SharepointForm.module.css';
-import LoadingPage from "./LoadingPage";
-
-interface ISharepointFormData {
-  Opcion1 : string,
-  Opcion2 : string,
-  Opcion3 : string,
-  Opcion4 : string,
-  Opcion5 : string,
-  Opcion6 : string,
-  Opcion7 : string,
-  Opcion8 : string,
-}
+// import { ErrorMessage } from "@hookform/error-message";
 
 // interface AppProps {
 //   updateList : (nombreProveedor: string, tipoProveedor: string, email: string, texto: string) => void;
 // }
 
-const SharepointUserForm1: React.FC = () => {
-  const [loadingPageVisible, setLoadingPageVisible] = useState<boolean>(false);
-  const [isVisible, setIsVisible] = useState(false);
-  const [data, setData] = useState<ISharepointFormData | undefined>(undefined);
+
+const SharepointUserForm1: React.FC = (): JSX.Element => {
+  const [formData, setFormData] = useState({
+    razonSocial: '',
+    nombreEmpresa: '',
+    cif: '',
+    telefono: '',
+    direccion: '',
+    codigoPostal: '',
+    poblacion: '',
+    correoElectronico: '',
+    paginaWeb: ''
+  });
   const navigate = useNavigate();
-  const body = useRef<HTMLDivElement>(null);
-  const formContainer = useRef<HTMLDivElement>(null);
-  const titleRef = useRef<HTMLHeadingElement>(null);
-
-  gsap.registerPlugin(ScrollTrigger);
-
-  useEffect(() => {
-    
-    const startAnimation = () => {
-      setIsVisible(true);
-      gsap.fromTo(
-        formContainer.current,
-        { x: "-100%", opacity: 0 },
-        { x: "0%", opacity: 1, duration: 1, ease: Power3.easeInOut }
-        );
-      };
-      
-      const startTitleAnimation = () => {
-        gsap.fromTo(
-          titleRef.current,
-          { y: "100%", opacity: 0 },
-          { y: "0%", opacity: 1, duration: 1, ease: Power3.easeInOut }
-          );
-        };
-        
-        gsap.set(formContainer.current,{ opacity: 0 });
-        
-        setTimeout(() => {
-          startAnimation();
-          startTitleAnimation();
-        }, 100);
-      }, []);
-      
-      const {
-        register,
-        formState: { errors },
-        handleSubmit
-      } = useForm<ISharepointFormData>({
-        criteriaMode: "all"
-      });
-
-  const onSubmit = (formData: ISharepointFormData) => {
-    console.log(data);
-    setLoadingPageVisible(true);
-    setIsVisible(false);
-    setData(formData);
+  
+  const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value } = e.target;
+    setFormData({
+      ...formData,
+      [name]: value
+    })};
+  
+  const handleSubmit = () => {
+    console.log('Datos enviados:', formData);
     navigate("/sites/intranetplexus/_layouts/15/workbench.aspx/sharepoint-user-form-2");
-    // updateList(formData.nombreProveedor, formData.tipoProveedor, formData.email, formData.texto); 
   };
 
-    return ( 
-      <>
-      {isVisible && ( 
-        <div
-        style={{ 
-        display: isVisible ? 'flex' : 'none',
-        flexDirection:'column', 
-        alignItems:'center',
-        justifyContent:'center',
-        backgroundImage: `url("https://i0.wp.com/gananzia.com/wp-content/uploads/2019/08/elmubas.jpg?fit=500%2C375&ssl=1")`,
-        backgroundSize: 'contain',
-        backgroundPosition: 'center',
-        width: '100%',
-        height: '50vh'
-        }}
-        >
-      <div>
-        <div ref={body}>
-            <div ref={formContainer}>
-            <div
-            style={{ display: 'flex',flexDirection:'column', alignItems:'center' }}
-            >
-              <h3 style={{color:' #29282b'}}>SOLICITUD DE ALTA</h3>
-            </div>
-            <h4 ref={titleRef} style={{ display: 'flex',flexDirection:'column', alignItems:'center',color:' #29282b' }}>
-              FORMULARIO 1/2
-            </h4>
-            <Form onSubmit={handleSubmit(onSubmit)} className="form">
-              <Form.Group style={{ display: 'flex',flexDirection:'column', alignItems:'center', fontSize: '10px'}}>
-                <Form.Control
-                  style={{ marginBottom: '10px', borderRadius: '5px',borderWidth: '1px',fontSize: '12px', width: '185px'}}
-                  type="text"
-                  placeholder="Opcion 1"
-                  {...register("Opcion1", {
-                    required: "Este campo es requerido.",
-                    maxLength: {
-                      value: 80,
-                      message: "Este campo debe tener máximo 80 caracteres"
-                    }
-                  })}
-                  />
-                <ErrorMessage
-                  errors={errors}
-                  name="Opcion1"
-                  render={({ messages }) =>
-                  messages && typeof messages === "object" ? (
-                    Object.keys(messages).map((type) => (
-                      <p 
-                      key={type}
-                      style={{color: 'red',marginTop: '-10px',fontSize: '11px',maxWidth: '156px',marginBottom:'2px'}}
-                      >
-                          {messages[type]}
-                        </p>
-                      ))
-                      ) : null
-                    }
-                  />
-                <Form.Control
-                  style={{ marginBottom: '10px', borderRadius: '5px',borderWidth: '1px',fontSize: '12px', width: '185px'}}
-                  type="text"
-                  placeholder="Opcion 2"
-                  {...register("Opcion2", {
-                    required: "Este campo es requerido.",
-                    maxLength: {
-                      value: 80,
-                      message: "Este campo debe tener máximo 80 caracteres"
-                    }
-                  })}
-                  />
-                <ErrorMessage
-                  errors={errors}
-                  name="Opcion2"
-                  render={({ messages }) =>
-                  messages && typeof messages === "object" ? (
-                    Object.keys(messages).map((type) => (
-                      <p 
-                      key={type}
-                      style={{color: 'red',marginTop: '-10px',fontSize: '11px',maxWidth: '156px',marginBottom:'2px'}}
-                      >
-                          {messages[type]}
-                        </p>
-                      ))
-                      ) : null
-                    }
-                  />
-                <Form.Control
-                  style={{ marginBottom: '10px', borderRadius: '5px',borderWidth: '1px',fontSize: '12px', width: '185px'}}
-                  type="text"
-                  placeholder="Opcion 3"
-                  {...register("Opcion3", {
-                    required: "Este campo es requerido.",
-                    maxLength: {
-                      value: 80,
-                      message: "Este campo debe tener máximo 80 caracteres"
-                    }
-                  })}
-                  />
-                <ErrorMessage
-                  errors={errors}
-                  name="Opcion3"
-                  render={({ messages }) =>
-                  messages && typeof messages === "object" ? (
-                    Object.keys(messages).map((type) => (
-                      <p 
-                      key={type}
-                      style={{color: 'red',marginTop: '-10px',fontSize: '11px',maxWidth: '156px',marginBottom:'2px'}}
-                      >
-                          {messages[type]}
-                        </p>
-                      ))
-                      ) : null
-                    }
-                  />
-                <Form.Control
-                  style={{ marginBottom: '10px', borderRadius: '5px',borderWidth: '1px',fontSize: '12px', width: '185px'}}
-                  type="text"
-                  placeholder="Opcion 4"
-                  {...register("Opcion4", {
-                    required: "Este campo es requerido.",
-                    maxLength: {
-                      value: 80,
-                      message: "Este campo debe tener máximo 80 caracteres"
-                    }
-                  })}
-                  />
-                <ErrorMessage
-                  errors={errors}
-                  name="Opcion4"
-                  render={({ messages }) =>
-                  messages && typeof messages === "object" ? (
-                    Object.keys(messages).map((type) => (
-                      <p 
-                      key={type}
-                      style={{color: 'red',marginTop: '-10px',fontSize: '11px',maxWidth: '156px',marginBottom:'2px'}}
-                      >
-                          {messages[type]}
-                        </p>
-                      ))
-                      ) : null
-                    }
-                  />
-                <Form.Control
-                  style={{ marginBottom: '10px', borderRadius: '5px',borderWidth: '1px',fontSize: '12px', width: '185px'}}
-                  type="text"
-                  placeholder="Opcion 5"
-                  {...register("Opcion5", {
-                    required: "Este campo es requerido.",
-                    maxLength: {
-                      value: 80,
-                      message: "Este campo debe tener máximo 80 caracteres"
-                    }
-                  })}
-                  />
-                <ErrorMessage
-                  errors={errors}
-                  name="Opcion5"
-                  render={({ messages }) =>
-                  messages && typeof messages === "object" ? (
-                    Object.keys(messages).map((type) => (
-                      <p 
-                      key={type}
-                      style={{color: 'red',marginTop: '-10px',fontSize: '11px',maxWidth: '156px',marginBottom:'2px'}}
-                      >
-                          {messages[type]}
-                        </p>
-                      ))
-                      ) : null
-                    }
-                  />
-                <Form.Control
-                  style={{ marginBottom: '10px', borderRadius: '5px',borderWidth: '1px',fontSize: '12px', width: '185px'}}
-                  type="text"
-                  placeholder="Opcion 6"
-                  {...register("Opcion6", {
-                    required: "Este campo es requerido.",
-                    maxLength: {
-                      value: 80,
-                      message: "Este campo debe tener máximo 80 caracteres"
-                    }
-                  })}
-                  />
-                <ErrorMessage
-                  errors={errors}
-                  name="Opcion6"
-                  render={({ messages }) =>
-                  messages && typeof messages === "object" ? (
-                    Object.keys(messages).map((type) => (
-                      <p 
-                      key={type}
-                      style={{color: 'red',marginTop: '-10px',fontSize: '11px',maxWidth: '156px',marginBottom:'2px'}}
-                      >
-                          {messages[type]}
-                        </p>
-                      ))
-                      ) : null
-                    }
-                  />
-                <Form.Control
-                  style={{ marginBottom: '10px', borderRadius: '5px',borderWidth: '1px',fontSize: '12px', width: '185px'}}
-                  type="text"
-                  placeholder="Opcion 7"
-                  {...register("Opcion7", {
-                    required: "Este campo es requerido.",
-                    maxLength: {
-                      value: 80,
-                      message: "Este campo debe tener máximo 80 caracteres"
-                    }
-                  })}
-                  />
-                <ErrorMessage
-                  errors={errors}
-                  name="Opcion7"
-                  render={({ messages }) =>
-                  messages && typeof messages === "object" ? (
-                    Object.keys(messages).map((type) => (
-                      <p 
-                      key={type}
-                      style={{color: 'red',marginTop: '-10px',fontSize: '11px',maxWidth: '156px',marginBottom:'2px'}}
-                      >
-                          {messages[type]}
-                        </p>
-                      ))
-                      ) : null
-                    }
-                  />
-                <Form.Control
-                  style={{ marginBottom: '10px', borderRadius: '5px',borderWidth: '1px',fontSize: '12px', width: '185px'}}
-                  type="text"
-                  placeholder="Opcion 8"
-                  {...register("Opcion8", {
-                    required: "Este campo es requerido.",
-                    maxLength: {
-                      value: 80,
-                      message: "Este campo debe tener máximo 80 caracteres"
-                    }
-                  })}
-                  />
-                <ErrorMessage
-                  errors={errors}
-                  name="Opcion8"
-                  render={({ messages }) =>
-                  messages && typeof messages === "object" ? (
-                    Object.keys(messages).map((type) => (
-                      <p 
-                      key={type}
-                      style={{color: 'red',marginTop: '-10px',fontSize: '11px',maxWidth: '156px',marginBottom:'2px'}}
-                      >
-                          {messages[type]}
-                        </p>
-                      ))
-                      ) : null
-                    }
-                  />
-                <Button 
-                style={{ 
-                  marginBottom: '5px',
-                  borderRadius: '7px',
-                  borderColor: '#2094c9',
-                  borderWidth: '2px',
-                  color: 'white',
-                  backgroundColor: '#2094c9',
-                  padding: '4px',
-                }} 
-                type="submit">
-                 ENVIAR
-                </Button>
-              </Form.Group>
-            </Form>
+  return (
+    <div
+    style={{
+      margin:'10px'
+    }}
+    >
+      <img src="https://www.ttrdata.com/i/R3MxdVI0Z2FubzlPY2ErMWpmbktoemNTYkNhTmxUVlV2R3V1T1JQK21vczhwRlhYV1Bkdmt1NnBmWStLcjJmTHc4VkdvUE5iR2UzVWM3dDhpQW84aTFhNmFiajZ4L3ZzUFltM1lPeXN1RTg9&w=186&h=130&far=1&bg=FFFFFF&fltr[]=usm&q=95" alt="elmubaLogo" />
+      <div
+      style={{
+        fontFamily: 'serif',
+        fontSize: '16px'
+      }}
+      >
+        <form onSubmit={handleSubmit}>
+          <table style={{ borderCollapse: 'collapse', width: '100%' }}>
+            <tbody>
+                <th colSpan={4} style={{ border: '1px solid #000', padding: '8px', backgroundColor: '#04a1e4', color: 'white' }}>
+                  <label htmlFor="titulo"><strong>1. DATOS GENERALES DE LA EMPRESA*</strong></label>
+                </th>
+              <tr>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <label htmlFor="razonSocial">RAZÓN SOCIAL</label>
+                </td>
+                <td style={{ border: '1px solid #000', padding: '8px'}}>
+                  <input type="text" id="razonSocial" name="razonSocial" value={formData.razonSocial} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                </td>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <label htmlFor="nombreEmpresa">NOMBRE DE LA EMPRESA</label>
+                </td>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <input type="text" id="nombreEmpresa" name="nombreEmpresa" value={formData.nombreEmpresa} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                </td>
+              </tr>
+              <tr>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <label htmlFor="cif">CIF</label>
+                </td>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <input type="text" id="cif" name="cif" value={formData.cif} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                </td>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <label htmlFor="telefono">TELÉFONO</label>
+                </td>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <input type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                </td>
+              </tr>
+              <tr>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <label htmlFor="direccion">DIRECCIÓN</label>
+                </td>
+                <td colSpan={3} style={{ border: '1px solid #000', padding: '8px' }}>
+                  <input type="text" id="direccion" name="direccion" value={formData.direccion} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                </td>
+              </tr>
+              <tr>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <label htmlFor="codigoPostal">C.P</label>
+                </td>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <input type="text" id="codigoPostal" name="codigoPostal" value={formData.codigoPostal} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                </td>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <label htmlFor="poblacion">POBLACIÓN</label>
+                </td>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <input type="text" id="poblacion" name="poblacion" value={formData.poblacion} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                </td>
+              </tr>
+              <tr>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <label htmlFor="correoElectronico">CORREO ELECTRÓNICO</label>
+                </td>
+                <td colSpan={3} style={{ border: '1px solid #000', padding: '8px' }}>
+                  <input type="text" id="correoElectronico" name="correoElectronico" value={formData.correoElectronico} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                </td>
+              </tr>
+              <tr>
+                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <label htmlFor="paginaWeb">PÁGINA WEB</label>
+                </td>
+                <td colSpan={3} style={{ border: '1px solid #000', padding: '8px' }}>
+                  <input type="text" id="paginaWeb" name="paginaWeb" value={formData.paginaWeb} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                </td>
+              </tr>
+            </tbody>
+          </table>
+          <div style={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
+            <button 
+            type="submit" 
+            style={{ 
+              display: 'flex',
+              justifyContent: 'center',
+              alignItems: 'center',
+              margin: '10px',
+              border:'1px solid #000',
+              color: 'white',
+              backgroundColor: '#04a1e4',
+              padding: '10px',
+              fontFamily: 'serif',
+              fontSize: '20px'
+            }}           >
+              Enviar</button>
           </div>
-        </div>
+        </form>
       </div>
     </div>
-    )}
-    {loadingPageVisible && <LoadingPage/>}     
-    </>
-  )
-};
+  );
+}
 
 export default SharepointUserForm1;
 
