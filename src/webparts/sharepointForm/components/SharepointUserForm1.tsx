@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as React from "react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 // import { ErrorMessage } from "@hookform/error-message";
 
 // interface AppProps {
@@ -39,10 +40,11 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
   return (
     <div
     style={{
-      margin:'10px'
+      margin:'10px',
+      minHeight: '65vh'
     }}
     >
-      <img src="https://www.ttrdata.com/i/R3MxdVI0Z2FubzlPY2ErMWpmbktoemNTYkNhTmxUVlV2R3V1T1JQK21vczhwRlhYV1Bkdmt1NnBmWStLcjJmTHc4VkdvUE5iR2UzVWM3dDhpQW84aTFhNmFiajZ4L3ZzUFltM1lPeXN1RTg9&w=186&h=130&far=1&bg=FFFFFF&fltr[]=usm&q=95" alt="elmubaLogo" />
+      <img style={{height: '96px'}} src="https://www.ttrdata.com/i/R3MxdVI0Z2FubzlPY2ErMWpmbktoemNTYkNhTmxUVlV2R3V1T1JQK21vczhwRlhYV1Bkdmt1NnBmWStLcjJmTHc4VkdvUE5iR2UzVWM3dDhpQW84aTFhNmFiajZ4L3ZzUFltM1lPeXN1RTg9&w=186&h=130&far=1&bg=FFFFFF&fltr[]=usm&q=95" alt="elmubaLogo" />
       <div
       style={{
         fontFamily: 'serif',
@@ -138,7 +140,21 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
               fontFamily: 'serif',
               fontSize: '20px'
             }}           >
-              Enviar</button>
+              Enviar</button> 
+              <div style={{ width: '100px', height: '100px' }}>
+              <div>0% COMPLETADO</div>
+        <CircularProgressbar
+          value={0}
+          text={'0%'}
+          styles={buildStyles({
+            textSize: '16px',
+            pathTransitionDuration: 0.5,
+            pathColor: '#04a1e4',
+            textColor: '#04a1e4',
+            trailColor: '#black',
+          })}
+        />
+      </div>
           </div>
         </form>
       </div>

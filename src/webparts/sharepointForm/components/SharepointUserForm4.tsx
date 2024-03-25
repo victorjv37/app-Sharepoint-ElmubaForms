@@ -12,15 +12,8 @@ import * as React from "react";
 
 const SharepointUserForm4: React.FC = (): JSX.Element => {
   const [formData, setFormData] = useState({
-    razonSocial: '',
-    nombreEmpresa: '',
-    cif: '',
-    telefono: '',
-    direccion: '',
-    codigoPostal: '',
-    poblacion: '',
-    correoElectronico: '',
-    paginaWeb: ''
+    condicionesEntrega: '',
+    agenciaTransporte: '',
   });
   const navigate = useNavigate();
   
@@ -39,10 +32,11 @@ const SharepointUserForm4: React.FC = (): JSX.Element => {
   return (
     <div
     style={{
-      margin:'10px'
+      margin:'10px',
+      minHeight: '65vh'
     }}
     >
-      <img src="https://www.ttrdata.com/i/R3MxdVI0Z2FubzlPY2ErMWpmbktoemNTYkNhTmxUVlV2R3V1T1JQK21vczhwRlhYV1Bkdmt1NnBmWStLcjJmTHc4VkdvUE5iR2UzVWM3dDhpQW84aTFhNmFiajZ4L3ZzUFltM1lPeXN1RTg9&w=186&h=130&far=1&bg=FFFFFF&fltr[]=usm&q=95" alt="elmubaLogo" />
+      <img style={{height: '96px'}} src="https://www.ttrdata.com/i/R3MxdVI0Z2FubzlPY2ErMWpmbktoemNTYkNhTmxUVlV2R3V1T1JQK21vczhwRlhYV1Bkdmt1NnBmWStLcjJmTHc4VkdvUE5iR2UzVWM3dDhpQW84aTFhNmFiajZ4L3ZzUFltM1lPeXN1RTg9&w=186&h=130&far=1&bg=FFFFFF&fltr[]=usm&q=95" alt="elmubaLogo" />
       <div
       style={{
         fontFamily: 'serif',
@@ -53,72 +47,22 @@ const SharepointUserForm4: React.FC = (): JSX.Element => {
           <table style={{ borderCollapse: 'collapse', width: '100%' }}>
             <tbody>
                 <th colSpan={4} style={{ border: '1px solid #000', padding: '8px', backgroundColor: '#04a1e4', color: 'white' }}>
-                  <label htmlFor="titulo"><strong>1. DATOS GENERALES DE LA EMPRESA*</strong></label>
+                  <label htmlFor="titulo"><strong>4. ENTREGAS*</strong></label>
                 </th>
               <tr>
                 <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <label htmlFor="razonSocial">RAZÓN SOCIAL</label>
+                  <label htmlFor="condicionesEntrega">CONDICIONES DE ENTREGA</label>
                 </td>
                 <td style={{ border: '1px solid #000', padding: '8px'}}>
-                  <input type="text" id="razonSocial" name="razonSocial" value={formData.razonSocial} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                  <input type="text" id="condicionesEntrega" name="condicionesEntrega" value={formData.condicionesEntrega} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <label htmlFor="nombreEmpresa">NOMBRE DE LA EMPRESA</label>
-                </td>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="nombreEmpresa" name="nombreEmpresa" value={formData.nombreEmpresa} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
-                </td>
-              </tr>
+              </tr>  
               <tr>
                 <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <label htmlFor="cif">CIF</label>
+                  <label htmlFor="agenciaTransporte">AGENCIA DE TRANSPORTE</label>
                 </td>
                 <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="cif" name="cif" value={formData.cif} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
-                </td>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <label htmlFor="telefono">TELÉFONO</label>
-                </td>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
-                </td>
-              </tr>
-              <tr>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <label htmlFor="direccion">DIRECCIÓN</label>
-                </td>
-                <td colSpan={3} style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="direccion" name="direccion" value={formData.direccion} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
-                </td>
-              </tr>
-              <tr>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <label htmlFor="codigoPostal">C.P</label>
-                </td>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="codigoPostal" name="codigoPostal" value={formData.codigoPostal} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
-                </td>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <label htmlFor="poblacion">POBLACIÓN</label>
-                </td>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="poblacion" name="poblacion" value={formData.poblacion} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
-                </td>
-              </tr>
-              <tr>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <label htmlFor="correoElectronico">CORREO ELECTRÓNICO</label>
-                </td>
-                <td colSpan={3} style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="correoElectronico" name="correoElectronico" value={formData.correoElectronico} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
-                </td>
-              </tr>
-              <tr>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <label htmlFor="paginaWeb">PÁGINA WEB</label>
-                </td>
-                <td colSpan={3} style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="paginaWeb" name="paginaWeb" value={formData.paginaWeb} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                  <input type="text" id="agenciaTransporte" name="agenciaTransporte" value={formData.agenciaTransporte} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
               </tr>
             </tbody>
