@@ -54,7 +54,23 @@ const SharepointUserForm2: React.FC = (): JSX.Element => {
       minHeight: '65vh'
     }}
     >
+      <div style={{display:'flex',justifyContent:'space-between'}}>
       <img style={{height: '96px'}} src="https://www.ttrdata.com/i/R3MxdVI0Z2FubzlPY2ErMWpmbktoemNTYkNhTmxUVlV2R3V1T1JQK21vczhwRlhYV1Bkdmt1NnBmWStLcjJmTHc4VkdvUE5iR2UzVWM3dDhpQW84aTFhNmFiajZ4L3ZzUFltM1lPeXN1RTg9&w=186&h=130&far=1&bg=FFFFFF&fltr[]=usm&q=95" alt="elmubaLogo" />
+      <span style={{ width: '75px', height: '75px',display:'flex', justifyContent:'center', alignItems: 'center',fontFamily: 'serif' }}>
+        <CircularProgressbar
+        value={50}
+        text={''}
+        styles={buildStyles({
+          textSize: '30px',
+          pathTransitionDuration: 0.5,
+          pathColor: '#04a1e4',
+          textColor: '#04a1e4',
+          trailColor: '#black',
+        })}
+        />
+        <span style={{position:'relative',right:'37px', fontSize:'18px', color:'#04a1e4'}}>2/4</span>
+      </span>
+      </div>
       <div
       style={{
         fontFamily: 'serif',
@@ -69,23 +85,27 @@ const SharepointUserForm2: React.FC = (): JSX.Element => {
                 <label htmlFor="titulo"><strong>2. CONDICIONES DE PAGO Y FACTURACIÓN*</strong></label>
               </th>
               </tr>
-              {/* <tr style={{ border: '1px solid #000', padding: '8px' }}>
-                <th style={{ border: '1px solid #000', padding: '8px', width: '25%'}}>Hola</th>
-                <td style={{ border: '1px solid #000', padding: '8px',}}>Hola</td>
-                <td style={{ border: '1px solid #000', padding: '8px',}}>Hola</td>
-                <td style={{ border: '1px solid #000', padding: '8px',}}>Hola</td>
-              </tr> */}
+              <tr style={{ border: '1px solid #000', padding: '8px' }}>
+                <td colSpan={1} style={{ border: '1px solid #000', padding: '8px', width: '25%'}}>PAGO A: 60 días</td>
+                <td colSpan={1} style={{ border: '1px solid #000', padding: '8px', width: '25%'}}>TRANSFERENCIA</td>
+                <td colSpan={1} style={{ border: '1px solid #000', padding: '8px', width: '25%'}}>MONEDA / DIVISA</td>
+                <td colSpan={1} style={{ border: '1px solid #000', padding: '8px', width: '25%'}}>€</td>
+              </tr>
+              <tr>
+                <td colSpan={4} style={{border:'1px solid #000',padding:'8px'}}>DÍAS DE PAGO: 1 y 15</td>
+              </tr>
             </thead>
             <tbody >
               <tr>
-                <td style={{ border: '1px solid #000', padding: '8px', width: '23%' }}>
+                <td colSpan={1} style={{ border: '1px solid #000', padding: '8px', width: '23%' }}>
                   DATOS BANCARIOS
                 </td>
+                <td colSpan={3} style={{border:'1px solid #000'}}>
                 <tr>
                   <td style={{ padding: '8px',borderBottom: '1px solid #000' , width: '15%' }}>
                     <label htmlFor="entidad">ENTIDAD</label>
                   </td>
-                  <td style={{ border: '1px solid #000', padding: '8px', borderTop: 'none'}}>
+                  <td style={{ border: '1px solid #000', padding: '8px', borderTop: 'none',borderRight:'none'}}>
                     <input required type="text" id="entidad" name="entidad" value={formData.entidad} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                   </td>
                 </tr>
@@ -93,7 +113,7 @@ const SharepointUserForm2: React.FC = (): JSX.Element => {
                   <td style={{ padding: '8px', borderTop: '1px solid #000', borderBottom: '1px solid #000'  }}>
                     <label htmlFor="swift">SWIFT</label>
                   </td>
-                  <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <td style={{ border: '1px solid #000', padding: '8px',borderRight:'none' }}>
                     <input required type="text" id="swift" name="swift" value={formData.swift} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                   </td>
                 </tr>
@@ -101,7 +121,7 @@ const SharepointUserForm2: React.FC = (): JSX.Element => {
                   <td style={{ padding: '8px', borderTop: '1px solid #000', borderBottom: '1px solid #000' }}>
                     <label htmlFor="iban">IBAN</label>
                   </td>
-                  <td style={{ border: '1px solid #000', padding: '8px' }}>
+                  <td style={{ border: '1px solid #000', padding: '8px',borderRight:'none' }}>
                     <input required type="text" id="iban" name="iban" value={formData.iban} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                   </td>
                 </tr>
@@ -109,16 +129,17 @@ const SharepointUserForm2: React.FC = (): JSX.Element => {
                   <td style={{ padding: '8px', borderTop: '1px solid #000' }}>
                     <label htmlFor="numeroCc">Nº CC</label>
                   </td>
-                  <td style={{ border: '1px solid #000', padding: '8px', borderBottom:'none' }}>
+                  <td style={{ border: '1px solid #000', padding: '8px', borderBottom:'none',borderRight:'none' }}>
                     <input required type="text" id="numeroCc" name="numeroCc" value={formData.numeroCc} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                   </td>
                 </tr>
+                </td>
               </tr>
               <tr>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                <td colSpan={1} style={{ border: '1px solid #000', padding: '8px' }}>
                   <label htmlFor="direccionFacturacion">DIRECCIÓN DE FACTURACION</label>
                 </td>
-                <td style={{ border: '1px solid #000', padding: '8px' }}>
+                <td colSpan={3} style={{ border: '1px solid #000', padding: '8px' }}>
                   <input required type="text" id="direccionFacturacion" name="direccionFacturacion" value={formData.direccionFacturacion} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
               </tr>
@@ -143,20 +164,6 @@ const SharepointUserForm2: React.FC = (): JSX.Element => {
               fontSize: '20px'
             }}           >
               Siguiente</button> 
-          </span>
-          <span style={{ width: '75px', height: '75px',display:'flex', justifyContent:'center', alignItems: 'center',fontFamily: 'serif' }}>
-            <CircularProgressbar
-            value={50}
-            text={''}
-            styles={buildStyles({
-              textSize: '30px',
-              pathTransitionDuration: 0.5,
-              pathColor: '#04a1e4',
-              textColor: '#04a1e4',
-              trailColor: '#black',
-            })}
-            />
-          <span style={{position:'relative',right:'37px', fontSize:'18px', color:'#04a1e4'}}>2/4</span>
           </span>
         </form>
       </div>

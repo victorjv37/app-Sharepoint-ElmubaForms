@@ -58,7 +58,23 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
       minHeight: '65vh'
     }}
     >
+      <div style={{display:'flex',justifyContent:'space-between'}}>
       <img style={{height: '96px'}} src="https://www.ttrdata.com/i/R3MxdVI0Z2FubzlPY2ErMWpmbktoemNTYkNhTmxUVlV2R3V1T1JQK21vczhwRlhYV1Bkdmt1NnBmWStLcjJmTHc4VkdvUE5iR2UzVWM3dDhpQW84aTFhNmFiajZ4L3ZzUFltM1lPeXN1RTg9&w=186&h=130&far=1&bg=FFFFFF&fltr[]=usm&q=95" alt="elmubaLogo" />
+      <span style={{ width: '75px', height: '75px',display:'flex', justifyContent:'center', alignItems: 'center',fontFamily: 'serif' }}>
+        <CircularProgressbar
+        value={25}
+        text={''}
+        styles={buildStyles({
+          textSize: '30px',
+          pathTransitionDuration: 0.5,
+          pathColor: '#04a1e4',
+          textColor: '#04a1e4',
+          trailColor: '#black',
+        })}
+        />
+      <span style={{position:'relative',right:'37px', fontSize:'18px', color:'#04a1e4'}}>1/4</span>
+      </span>
+      </div>
       <div
       style={{
         fontFamily: 'serif',
@@ -158,20 +174,6 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
               fontSize: '20px'
             }}           >
               Siguiente</button> 
-          </span>
-          <span style={{ width: '75px', height: '75px',display:'flex', justifyContent:'center', alignItems: 'center',fontFamily: 'serif' }}>
-            <CircularProgressbar
-            value={25}
-            text={''}
-            styles={buildStyles({
-              textSize: '30px',
-              pathTransitionDuration: 0.5,
-              pathColor: '#04a1e4',
-              textColor: '#04a1e4',
-              trailColor: '#black',
-            })}
-            />
-          <span style={{position:'relative',right:'37px', fontSize:'18px', color:'#04a1e4'}}>1/4</span>
           </span>
         </form>
       </div>

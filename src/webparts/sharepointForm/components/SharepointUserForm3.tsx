@@ -80,7 +80,23 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
       maxWidth: '100%'
     }}
     >
+      <div style={{display:'flex',justifyContent:'space-between'}}>
       <img style={{height: '96px'}} src="https://www.ttrdata.com/i/R3MxdVI0Z2FubzlPY2ErMWpmbktoemNTYkNhTmxUVlV2R3V1T1JQK21vczhwRlhYV1Bkdmt1NnBmWStLcjJmTHc4VkdvUE5iR2UzVWM3dDhpQW84aTFhNmFiajZ4L3ZzUFltM1lPeXN1RTg9&w=186&h=130&far=1&bg=FFFFFF&fltr[]=usm&q=95" alt="elmubaLogo" />
+      <span style={{ width: '75px', height: '75px',display:'flex', justifyContent:'center', alignItems: 'center',fontFamily: 'serif' }}>
+        <CircularProgressbar
+        value={75}
+        text={''}
+        styles={buildStyles({
+          textSize: '30px',
+          pathTransitionDuration: 0.5,
+          pathColor: '#04a1e4',
+          textColor: '#04a1e4',
+          trailColor: '#black',
+        })}
+        />
+      <span style={{position:'relative',right:'37px', fontSize:'18px', color:'#04a1e4'}}>3/4</span>
+      </span>
+      </div>
       <div
       style={{
         fontFamily: 'serif',
@@ -122,7 +138,7 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
                 </tr>
                 <tr>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
-                    RECEPCION PEDIDOS*
+                    RECEPCIÓN PEDIDOS*
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="recPedidosNombre">. </label>
@@ -139,7 +155,7 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
                 </tr>
                 <tr>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
-                    RECEPCION PREVISIONES
+                    RECEPCIÓN PREVISIONES
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="recPrevisionesNombre">. </label>
@@ -243,31 +259,31 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
                 <td colSpan={1} style={{ border: '1px solid #000', padding: '8px' }}>
                   <label htmlFor="cae">CAE, COORDINACIÓN ACTIVIDADES EMPRESAIALES</label>
                 </td>
-                <td colSpan={3} style={{border: '1px solid black'}}>
-                  <tr>
-                    <td style={{ borderBottom: '1px solid #000',borderRight: '1px solid #000', padding: '8px' }}>
+                <td colSpan={3} style={{border: '1px solid black', padding:'0px'}}>
+                  <tr style={{height:'33.5px'}}>
+                    <td style={{borderRight: '1px solid #000' }}>
                       <label style={{display:'none'}} htmlFor="caeNombre1">. </label>
                       <input type="text" id="caeNombre1" name="caeNombre1" value={formData.caeNombre1} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none', paddingTop:'0px'}} />
                     </td>
-                    <td style={{ borderBottom: '1px solid #000',borderRight: '1px solid #000', padding: '8px' }}>
+                    <td style={{borderRight: '1px solid #000' }}>
                       <label style={{display:'none'}} htmlFor="caeTelefono1">. </label>
                       <input type="text" id="caeTelefono1" name="caeTelefono1" value={formData.caeTelefono1} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none', paddingTop:'0px'}} />
                     </td>
-                    <td style={{ borderBottom: '1px solid #000', padding: '8px' }}>
+                    <td>
                       <label style={{display:'none'}} htmlFor="caeEmail1">. </label>
                       <input type="text" id="caeEmail1" name="caeEmail1" value={formData.caeEmail1} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none', paddingTop:'0px'}} />
                     </td>
                   </tr>
-                  <tr>
-                    <td style={{ borderTop: '1px solid #000',borderRight: '1px solid #000', padding: '8px' }}>
+                  <tr style={{height:'33.5px'}}>
+                    <td style={{ borderTop: '1px solid #000',borderRight: '1px solid #000' }}>
                       <label style={{display:'none'}} htmlFor="caeNombre2">. </label>
                       <input type="text" id="caeNombre2" name="caeNombre2" value={formData.caeNombre2} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none', paddingTop:'0px'}} />
                     </td>
-                    <td style={{ borderTop: '1px solid #000',borderRight: '1px solid #000', padding: '8px' }}>
+                    <td style={{ borderTop: '1px solid #000',borderRight: '1px solid #000' }}>
                       <label style={{display:'none'}} htmlFor="caeTelefono2">. </label>
                       <input type="text" id="caeTelefono2" name="caeTelefono2" value={formData.caeTelefono2} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none', paddingTop:'0px'}} />
                     </td>
-                    <td style={{ borderTop: '1px solid #000', padding: '8px' }}>
+                    <td style={{ borderTop: '1px solid #000' }}>
                       <label style={{display:'none'}} htmlFor="caeEmail2">. </label>
                       <input type="text" id="caeEmail2" name="caeEmail2" value={formData.caeEmail2} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none', paddingTop:'0px'}} />
                     </td>
@@ -295,20 +311,6 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
               fontSize: '20px'
             }}           >
               Siguiente</button> 
-          </span>
-          <span style={{ width: '75px', height: '75px',display:'flex', justifyContent:'center', alignItems: 'center',fontFamily: 'serif' }}>
-            <CircularProgressbar
-            value={75}
-            text={''}
-            styles={buildStyles({
-              textSize: '30px',
-              pathTransitionDuration: 0.5,
-              pathColor: '#04a1e4',
-              textColor: '#04a1e4',
-              trailColor: '#black',
-            })}
-            />
-          <span style={{position:'relative',right:'37px', fontSize:'18px', color:'#04a1e4'}}>3/4</span>
           </span>
         </form>
       </div>
