@@ -12,6 +12,7 @@ import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 
 
 const SharepointUserForm1: React.FC = (): JSX.Element => {
+  const [errorEnSubmit, setErrorEnSubmit] = useState(false);
   const [formData, setFormData] = useState({
     razonSocial: '',
     nombreEmpresa: '',
@@ -32,10 +33,23 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
       [name]: value
     })};
   
-  const handleSubmit = () => {
-    console.log('Datos enviados:', formData);
-    navigate("/sites/intranetplexus/_layouts/15/workbench.aspx/sharepoint-user-form-2");
-  };
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const form = event.target as HTMLFormElement;
+      if (!form.checkValidity()) {
+        setErrorEnSubmit(true); 
+      } else {
+        setErrorEnSubmit(false);
+        console.log('Datos enviados:', formData);
+        navigate("/sites/intranetplexus/_layouts/15/workbench.aspx/sharepoint-user-form-2");
+      }
+      console.log(errorEnSubmit)
+    };
+
+    const handleInvalid = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      setErrorEnSubmit(true); 
+    };
 
   return (
     <div
@@ -51,7 +65,7 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
         fontSize: '16px'
       }}
       >
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} onInvalid={handleInvalid}>
           <table style={{ borderCollapse: 'collapse', width: '100%' }}>
             <tbody>
                 <th colSpan={4} style={{ border: '1px solid #000', padding: '8px', backgroundColor: '#04a1e4', color: 'white' }}>
@@ -62,13 +76,13 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
                   <label htmlFor="razonSocial">RAZÓN SOCIAL</label>
                 </td>
                 <td style={{ border: '1px solid #000', padding: '8px'}}>
-                  <input type="text" id="razonSocial" name="razonSocial" value={formData.razonSocial} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                  <input required type="text" id="razonSocial" name="razonSocial" value={formData.razonSocial} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
                 <td style={{ border: '1px solid #000', padding: '8px' }}>
                   <label htmlFor="nombreEmpresa">NOMBRE DE LA EMPRESA</label>
                 </td>
                 <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="nombreEmpresa" name="nombreEmpresa" value={formData.nombreEmpresa} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                  <input required type="text" id="nombreEmpresa" name="nombreEmpresa" value={formData.nombreEmpresa} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
               </tr>
               <tr>
@@ -76,13 +90,13 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
                   <label htmlFor="cif">CIF</label>
                 </td>
                 <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="cif" name="cif" value={formData.cif} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                  <input required type="text" id="cif" name="cif" value={formData.cif} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
                 <td style={{ border: '1px solid #000', padding: '8px' }}>
                   <label htmlFor="telefono">TELÉFONO</label>
                 </td>
                 <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                  <input required type="text" id="telefono" name="telefono" value={formData.telefono} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
               </tr>
               <tr>
@@ -90,7 +104,7 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
                   <label htmlFor="direccion">DIRECCIÓN</label>
                 </td>
                 <td colSpan={3} style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="direccion" name="direccion" value={formData.direccion} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                  <input required type="text" id="direccion" name="direccion" value={formData.direccion} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
               </tr>
               <tr>
@@ -98,13 +112,13 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
                   <label htmlFor="codigoPostal">C.P</label>
                 </td>
                 <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="codigoPostal" name="codigoPostal" value={formData.codigoPostal} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                  <input required type="text" id="codigoPostal" name="codigoPostal" value={formData.codigoPostal} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
                 <td style={{ border: '1px solid #000', padding: '8px' }}>
                   <label htmlFor="poblacion">POBLACIÓN</label>
                 </td>
                 <td style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="poblacion" name="poblacion" value={formData.poblacion} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                  <input required type="text" id="poblacion" name="poblacion" value={formData.poblacion} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
               </tr>
               <tr>
@@ -112,7 +126,7 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
                   <label htmlFor="correoElectronico">CORREO ELECTRÓNICO</label>
                 </td>
                 <td colSpan={3} style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="correoElectronico" name="correoElectronico" value={formData.correoElectronico} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                  <input required type="text" id="correoElectronico" name="correoElectronico" value={formData.correoElectronico} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
               </tr>
               <tr>
@@ -120,12 +134,15 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
                   <label htmlFor="paginaWeb">PÁGINA WEB</label>
                 </td>
                 <td colSpan={3} style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input type="text" id="paginaWeb" name="paginaWeb" value={formData.paginaWeb} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
+                  <input required type="text" id="paginaWeb" name="paginaWeb" value={formData.paginaWeb} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
               </tr>
             </tbody>
           </table>
-          <div style={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
+          {errorEnSubmit && 
+          <div style={{color:'red', display: 'flex', justifyContent: 'center'}}>Deben rellenarse todos los campos</div>
+          }
+          <span style={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
             <button 
             type="submit" 
             style={{ 
@@ -140,22 +157,22 @@ const SharepointUserForm1: React.FC = (): JSX.Element => {
               fontFamily: 'serif',
               fontSize: '20px'
             }}           >
-              Enviar</button> 
-              <div style={{ width: '100px', height: '100px' }}>
-              <div>0% COMPLETADO</div>
-        <CircularProgressbar
-          value={0}
-          text={'0%'}
-          styles={buildStyles({
-            textSize: '16px',
-            pathTransitionDuration: 0.5,
-            pathColor: '#04a1e4',
-            textColor: '#04a1e4',
-            trailColor: '#black',
-          })}
-        />
-      </div>
-          </div>
+              Siguiente</button> 
+          </span>
+          <span style={{ width: '75px', height: '75px',display:'flex', justifyContent:'center', alignItems: 'center',fontFamily: 'serif' }}>
+            <CircularProgressbar
+            value={25}
+            text={''}
+            styles={buildStyles({
+              textSize: '30px',
+              pathTransitionDuration: 0.5,
+              pathColor: '#04a1e4',
+              textColor: '#04a1e4',
+              trailColor: '#black',
+            })}
+            />
+          <span style={{position:'relative',right:'37px', fontSize:'18px', color:'#04a1e4'}}>1/4</span>
+          </span>
         </form>
       </div>
     </div>

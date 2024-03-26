@@ -3,6 +3,7 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import * as React from "react";
+import { CircularProgressbar, buildStyles } from "react-circular-progressbar";
 // import { ErrorMessage } from "@hookform/error-message";
 
 // interface AppProps {
@@ -11,6 +12,7 @@ import * as React from "react";
 
 
 const SharepointUserForm3: React.FC = (): JSX.Element => {
+  const [errorEnSubmit, setErrorEnSubmit] = useState(false);
   const [formData, setFormData] = useState({
         comercialNombre: '',
         comercialTelefono: '',
@@ -52,10 +54,23 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
       [name]: value
     })};
   
-  const handleSubmit = () => {
-    console.log('Datos enviados:', formData);
-    navigate("/sites/intranetplexus/_layouts/15/workbench.aspx/sharepoint-user-form-4");
-  };
+    const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      const form = event.target as HTMLFormElement;
+      if (!form.checkValidity()) {
+        setErrorEnSubmit(true); 
+      } else {
+        setErrorEnSubmit(false);
+        console.log('Datos enviados:', formData);
+        navigate("/sites/intranetplexus/_layouts/15/workbench.aspx/sharepoint-user-form-4");
+      }
+      console.log(errorEnSubmit)
+    };
+
+    const handleInvalid = (event: React.FormEvent<HTMLFormElement>) => {
+      event.preventDefault();
+      setErrorEnSubmit(true); 
+    };
 
   return (
     <div
@@ -72,7 +87,7 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
         fontSize: '14px'
       }}
       >
-        <form onSubmit={handleSubmit}>
+        <form onSubmit={handleSubmit} onInvalid={handleInvalid}>
           <table style={{borderCollapse: 'collapse',width: '100%',border:'1px solid #000'}}>
             <thead>
               <tr>
@@ -94,15 +109,15 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="comercialNombre">. </label>
-                    <input type="text" id="comercialNombre" name="comercialNombre" value={formData.comercialNombre} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="comercialNombre" name="comercialNombre" value={formData.comercialNombre} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="comercialTelefono">. </label>
-                    <input type="text" id="comercialTelefono" name="comercialTelefono" value={formData.comercialTelefono} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="comercialTelefono" name="comercialTelefono" value={formData.comercialTelefono} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="comercialEmail">. </label>
-                    <input type="text" id="comercialEmail" name="comercialEmail" value={formData.comercialEmail} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="comercialEmail" name="comercialEmail" value={formData.comercialEmail} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                 </tr>
                 <tr>
@@ -111,15 +126,15 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="recPedidosNombre">. </label>
-                    <input type="text" id="recPedidosNombre" name="recPedidosNombre" value={formData.recPedidosNombre} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="recPedidosNombre" name="recPedidosNombre" value={formData.recPedidosNombre} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="recPedidosTelefono">. </label>
-                    <input type="text" id="recPedidosTelefono" name="recPedidosTelefono" value={formData.recPedidosTelefono} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="recPedidosTelefono" name="recPedidosTelefono" value={formData.recPedidosTelefono} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="recPedidosEmail">. </label>
-                    <input type="text" id="recPedidosEmail" name="recPedidosEmail" value={formData.recPedidosEmail} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="recPedidosEmail" name="recPedidosEmail" value={formData.recPedidosEmail} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                 </tr>
                 <tr>
@@ -145,15 +160,15 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="calidadNombre">. </label>
-                    <input type="text" id="calidadNombre" name="calidadNombre" value={formData.calidadNombre} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="calidadNombre" name="calidadNombre" value={formData.calidadNombre} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="calidadTelefono">. </label>
-                    <input type="text" id="calidadTelefono" name="calidadTelefono" value={formData.calidadTelefono} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="calidadTelefono" name="calidadTelefono" value={formData.calidadTelefono} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="calidadEmail">. </label>
-                    <input type="text" id="calidadEmail" name="calidadEmail" value={formData.calidadEmail} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="calidadEmail" name="calidadEmail" value={formData.calidadEmail} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                 </tr>
                 <tr>
@@ -175,19 +190,19 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
                 </tr>
                 <tr>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
-                    ADMINISTRACIÓN DE FACTURAS*
+                    ADMINISTRACIÓN / FACTURACIÓN*
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="adminFactNombre">. </label>
-                    <input type="text" id="adminFactNombre" name="adminFactNombre" value={formData.adminFactNombre} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="adminFactNombre" name="adminFactNombre" value={formData.adminFactNombre} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="adminFactTelefono">. </label>
-                    <input type="text" id="adminFactTelefono" name="adminFactTelefono" value={formData.adminFactTelefono} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="adminFactTelefono" name="adminFactTelefono" value={formData.adminFactTelefono} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                   <td style={{border:'1px solid #000',textAlign:'center'}}>
                     <label style={{display:'none'}} htmlFor="adminFactEmail">. </label>
-                    <input type="text" id="adminFactEmail" name="adminFactEmail" value={formData.adminFactEmail} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
+                    <input required type="text" id="adminFactEmail" name="adminFactEmail" value={formData.adminFactEmail} onChange={handleChange} style={{ padding: '2px', border: 'none', outline: 'none'}} />
                   </td>
                 </tr>
                 <tr>
@@ -261,7 +276,10 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
                   </tr>
             </tbody>
           </table>
-          <div style={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
+          {errorEnSubmit && 
+          <div style={{color:'red', display: 'flex', justifyContent: 'center'}}>Deben rellenarse los campos marcados con *</div>
+          }
+          <span style={{display:'flex', justifyContent:'center', alignItems: 'center'}}>
             <button 
             type="submit" 
             style={{ 
@@ -276,8 +294,22 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
               fontFamily: 'serif',
               fontSize: '20px'
             }}           >
-              Enviar</button>
-          </div>
+              Siguiente</button> 
+          </span>
+          <span style={{ width: '75px', height: '75px',display:'flex', justifyContent:'center', alignItems: 'center',fontFamily: 'serif' }}>
+            <CircularProgressbar
+            value={75}
+            text={''}
+            styles={buildStyles({
+              textSize: '30px',
+              pathTransitionDuration: 0.5,
+              pathColor: '#04a1e4',
+              textColor: '#04a1e4',
+              trailColor: '#black',
+            })}
+            />
+          <span style={{position:'relative',right:'37px', fontSize:'18px', color:'#04a1e4'}}>3/4</span>
+          </span>
         </form>
       </div>
     </div>
