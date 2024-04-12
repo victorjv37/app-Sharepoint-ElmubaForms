@@ -62,7 +62,7 @@ const SharepointUserForm3: React.FC = (): JSX.Element => {
       } else {
         setErrorEnSubmit(false);
         console.log('Datos enviados:', formData);
-        navigate("/sites/intranetplexus/_layouts/15/workbench.aspx/sharepoint-user-form-4");
+        navigate("/sites/intranetplexus/_layouts/15/workbench.aspx/loading-page");
       }
       console.log(errorEnSubmit)
     };

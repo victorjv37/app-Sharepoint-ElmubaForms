@@ -18,7 +18,6 @@ const SharepointUserForm2: React.FC = (): JSX.Element => {
     swift: '',
     iban: '',
     numeroCc: '',
-    direccionFacturacion: ''
   });
   const navigate = useNavigate();
   
@@ -133,14 +132,6 @@ const SharepointUserForm2: React.FC = (): JSX.Element => {
                     <input required type="text" id="numeroCc" name="numeroCc" value={formData.numeroCc} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                   </td>
                 </tr>
-                </td>
-              </tr>
-              <tr>
-                <td colSpan={1} style={{ border: '1px solid #000', padding: '8px' }}>
-                  <label htmlFor="direccionFacturacion">DIRECCIÓN DE FACTURACION</label>
-                </td>
-                <td colSpan={3} style={{ border: '1px solid #000', padding: '8px' }}>
-                  <input required type="text" id="direccionFacturacion" name="direccionFacturacion" value={formData.direccionFacturacion} onChange={handleChange} style={{ padding: '2px', border: 'none', width: 'calc(100% - 4px)', outline: 'none'}} />
                 </td>
               </tr>
             </tbody>
